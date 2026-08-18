@@ -55,7 +55,7 @@
     <input class="file-input" id="fileLean" type="file" accept=".xlsx,.csv">
     <div class="actions"><button class="secondary" id="clear">Limpar filtros</button><button class="primary" id="xls">Exportar recorte XLS</button></div>
   </div>
-  <div class="mentor-data-bar"><span class="mentor-data-title">Atualização local temporária da Data Prevista</span><button class="teal" id="importMentorData" type="button">Importar dados_mentoria.xlsx</button><button class="secondary" id="discardLocalMentor" type="button" style="display:none">Usar planejamento publicado</button><button class="outline" id="exportMentorData" type="button" style="display:none">Exportar dados dos Mentores</button><button class="secondary" id="restoreMentorBackup" type="button" style="display:none">Restaurar último backup local</button><input class="file-input" id="fileMentorData" type="file" accept=".xlsx"><span id="mentorDataStatus" class="mentor-data-status" aria-live="polite">Opcional: importe dados_mentoria.xlsx para visualizar imediatamente as datas previstas mais recentes. A importação vale apenas neste navegador e não altera o GitHub.</span></div>
+  <div class="mentor-data-bar"><span class="mentor-data-title">Atualização local temporária da Data Prevista</span><button class="teal" id="importMentorData" type="button">Importar dados_mentoria.xlsx</button><button class="secondary" id="discardLocalMentor" type="button" style="display:none">Usar planejamento publicado</button><button class="outline" id="exportMentorData" type="button" style="display:none">Exportar dados dos Mentores</button><button class="secondary" id="restoreMentorBackup" type="button" style="display:none">Restaurar último backup local</button><input class="file-input" id="fileMentorData" type="file" accept=".xlsx"><span id="mentorDataStatus" class="mentor-data-status" aria-live="polite">Opcional: importe dados_mentoria.xlsx para visualizar imediatamente as datas previstas mais recentes. A coluna ID pode conter o ID numérico do SGT ou o número da PROPOSTA. A importação vale apenas neste navegador e não altera o GitHub.</span></div>
   <div id="sourceStatus" class="source-status" aria-live="polite"></div>
 </section>
 <section id="kpis" class="kpis"></section>
@@ -214,7 +214,7 @@ function parseCsv(text){const lines=text.replace(/^\uFEFF/,'').split(/\r?\n/).fi
 function findHeader(sheet,kind){const req=kind==='sgt'?['CNPJ','STATUS','DATA_DE_ACEITACAO','DATA_DE_EXECUCAO','UNIDADE','PRODUTO_NACIONAL']:['CNPJ','STATUS_DO_PROCESSO'];let best={score:-1,index:-1};sheet.rows.slice(0,35).forEach((row,i)=>{const keys=new Set(row.map(norm)),score=req.filter(k=>keys.has(k)).length;if(score>best.score)best={score,index:i}});return best}
 function rowsToObjects(sheet,idx){const heads=(sheet.rows[idx]||[]).map(norm);return sheet.rows.slice(idx+1).filter(r=>r.some(x=>cleanText(x))).map(r=>{const o={};heads.forEach((h,i)=>{if(h)o[h]=r[i]??''});return o})}
 async function readSpreadsheet(file,kind){const ext=file.name.split('.').pop().toLowerCase();let sheets;if(ext==='xlsx')sheets=await parseXlsx(await file.arrayBuffer());else if(ext==='csv')sheets=parseCsv(await file.text());else throw new Error('Selecione um arquivo .xlsx ou .csv.');let chosen=null;for(const s of sheets){const h=findHeader(s,kind);if(!chosen||h.score>chosen.h.score)chosen={s,h}}const min=kind==='sgt'?5:2;if(!chosen||chosen.h.score<min)throw new Error('Cabeçalhos esperados não encontrados.');return rowsToObjects(chosen.s,chosen.h.index)}
-function normalizeSgt(rows){const out=[];for(const o of rows){const status=canonStatus(field(o,'STATUS')),produto=canonProduct(field(o,'PRODUTO NACIONAL')),porte=cleanText(field(o,'PORTE CONTRATAÇÃO'));if(!status||!produto||!isMpe(porte))continue;const ace=excelDateToIso(field(o,'DATA DE ACEITAÇÃO'));if(!ace)continue;const ano=+ace.slice(0,4);if(!YEARS.includes(ano))continue;const cnpj=cleanCnpj(field(o,'CNPJ_LIMPO','CNPJ'));if(!cnpj)continue;out.push({id:field(o,'ID'),cnpj,razao_social:cleanText(field(o,'RAZÃO SOCIAL','CLIENTE')),cliente:cleanText(field(o,'CLIENTE')),unidade:canonicalUnit(field(o,'UNIDADE')),produto,status,porte,data_aceitacao:ace,data_execucao:excelDateToIso(field(o,'DATA DE EXECUÇÃO')),mes:+ace.slice(5,7),ano_ciclo:ano,fallback_mentoria:canonMentoria(field(o,'STATUS MENTORIA LEAN','STATUS_MENTORIA_LEAN'))})}if(!out.length)throw new Error('Nenhum contrato elegível de 2024 a 2027 encontrado.');return out}
+function normalizeSgt(rows){const out=[];for(const o of rows){const status=canonStatus(field(o,'STATUS')),produto=canonProduct(field(o,'PRODUTO NACIONAL')),porte=cleanText(field(o,'PORTE CONTRATAÇÃO'));if(!status||!produto||!isMpe(porte))continue;const ace=excelDateToIso(field(o,'DATA DE ACEITAÇÃO'));if(!ace)continue;const ano=+ace.slice(0,4);if(!YEARS.includes(ano))continue;const cnpj=cleanCnpj(field(o,'CNPJ_LIMPO','CNPJ'));if(!cnpj)continue;out.push({id:field(o,'ID'),proposta:cleanText(field(o,'PROPOSTA')),cnpj,razao_social:cleanText(field(o,'RAZÃO SOCIAL','CLIENTE')),cliente:cleanText(field(o,'CLIENTE')),unidade:canonicalUnit(field(o,'UNIDADE')),produto,status,porte,data_aceitacao:ace,data_execucao:excelDateToIso(field(o,'DATA DE EXECUÇÃO')),mes:+ace.slice(5,7),ano_ciclo:ano,fallback_mentoria:canonMentoria(field(o,'STATUS MENTORIA LEAN','STATUS_MENTORIA_LEAN'))})}if(!out.length)throw new Error('Nenhum contrato elegível de 2024 a 2027 encontrado.');return out}
 function normalizeLean(rows){const out=[];for(const o of rows){const cnpj=cleanCnpj(field(o,'CNPJ_LIMPO','CNPJ'));if(!cnpj)continue;const mentor=extractMentor(field(o,'Equipe do Projeto (Mentor/Docente)','MENTOR/DOCENTE','MENTOR'));out.push({id:+field(o,'ID')||0,cnpj,razao_social:cleanText(field(o,'Razão Social','RAZÃO SOCIAL')),status:canonMentoria(field(o,'Status do Processo','STATUS MENTORIA LEAN')),mentor,mentor_primeiro_nome:mentorFirst(mentor),alunos:countStudents(field(o,'Alunos','ALUNOS')),data_visita:excelDateToIso(field(o,'Data da visita inicial','DATA DA VISITA INICIAL')),setor_industrial:cleanText(field(o,'Setor Industrial','SETOR INDUSTRIAL'))||'Não informado',produto:inferProduct(field(o,'Alunos','ALUNOS')),unidade_operacional:extractUnit(field(o,'Equipe do Projeto (Mentor/Docente)'))})}if(!out.length)throw new Error('Nenhum registro LEAN válido encontrado.');return out}
 async function handleUpload(kind,file){if(!file)return;const date=parseDateFromFileName(file.name);if(!date){alert('O nome do arquivo precisa conter uma data reconhecível (AAAA-MM-DD, DD-MM-AAAA ou AAAAMMDD).');return}try{const rows=await readSpreadsheet(file,kind);if(kind==='sgt'){currentSgt=normalizeSgt(rows);SOURCE_META.sgt.fileName=file.name}else{currentLeanRows=normalizeLean(rows);SOURCE_META.lean.fileName=file.name}rebuildData()}catch(err){alert('Não foi possível carregar o arquivo: '+err.message)}}
 
@@ -236,7 +236,7 @@ rebuildData();
   let mentorPlanRows=[];
   let mentorPlanMeta={};
 
-  function cleanMentorIdV3(v){const s=cleanText(v).replace(/\.0$/,'');return /^\d+$/.test(s)?s:''}
+  function cleanMentorIdV3(v){return cleanText(v).replace(/\.0$/,'').trim()}
   function mentorKeyV3(id,cnpj){return cleanMentorIdV3(id)+'|'+cleanCnpj(cnpj)}
   function validPlannedDate(v){const raw=cleanText(v);if(!raw)return {date:'',invalid:false};const iso=excelDateToIso(v);return {date:iso,invalid:!iso}}
   function savePlanCacheV3(){try{localStorage.setItem(MENTOR_PLAN_CACHE_KEY,JSON.stringify(mentorPlanRows));localStorage.setItem(MENTOR_PLAN_META_KEY,JSON.stringify(mentorPlanMeta));return true}catch(err){console.warn('Cache de dados_mentoria indisponível.',err);return false}}
@@ -276,17 +276,20 @@ rebuildData();
     return rowsToObjects(chosen.s,chosen.h.index);
   }
   function normalizeMentorSpreadsheetV3(rows){
-    const currentById=new Map(currentSgt.map(r=>[cleanMentorIdV3(r.id),cleanCnpj(r.cnpj)]).filter(([id,cnpj])=>id&&cnpj));
-    const map=new Map();let invalidKey=0,invalidDate=0,mismatch=0;
+    const map=new Map();let invalidKey=0,invalidDate=0,mismatch=0,notFound=0;
+    const allIdentifiers=new Set();
+    (currentSgt||[]).forEach(r=>{const id=cleanMentorIdV3(r.id),prop=cleanMentorIdV3(r.proposta);if(id)allIdentifiers.add(id);if(prop)allIdentifiers.add(prop)});
     for(const o of rows){
-      const cnpj=cleanCnpj(field(o,'CNPJ')),id=cleanMentorIdV3(field(o,'ID'));
-      if(!cnpj||!id){if(cnpj||id)invalidKey++;continue}
-      if(currentById.has(id)&&currentById.get(id)!==cnpj){mismatch++;continue}
+      const cnpj=cleanCnpj(field(o,'CNPJ')),ident=cleanMentorIdV3(field(o,'ID'));
+      if(!cnpj||!ident){if(cnpj||ident)invalidKey++;continue}
+      const contract=(currentSgt||[]).find(r=>cleanCnpj(r.cnpj)===cnpj&&(cleanMentorIdV3(r.id)===ident||cleanMentorIdV3(r.proposta)===ident));
+      if(!contract){if(allIdentifiers.has(ident))mismatch++;else notFound++;continue}
       const planned=validPlannedDate(field(o,'DATA PREVISTA MENTORIA','DATA PREVISTA','PREVISTA'));
       if(planned.invalid){invalidDate++;continue}
-      map.set(mentorKeyV3(id,cnpj),{id,cnpj,data_prevista_mentoria:planned.date});
+      const id=cleanMentorIdV3(contract.id);
+      map.set(mentorKeyV3(id,cnpj),{id,proposta:cleanMentorIdV3(contract.proposta),cnpj,data_prevista_mentoria:planned.date});
     }
-    return {records:[...map.values()],invalidKey,invalidDate,mismatch};
+    return {records:[...map.values()],invalidKey,invalidDate,mismatch,notFound};
   }
   function updateMentorPlanStatus(message='',kind=''){
     const el=$('mentorDataStatus');if(!el)return;
@@ -308,7 +311,7 @@ rebuildData();
       const notes=[];
       if(result.invalidKey)notes.push(`${fmtN(result.invalidKey)} linha(s) sem CNPJ/ID completo`);
       if(result.invalidDate)notes.push(`${fmtN(result.invalidDate)} data(s) prevista(s) inválida(s)`);
-      if(result.mismatch)notes.push(`${fmtN(result.mismatch)} linha(s) rejeitada(s) por divergência entre ID e CNPJ`);
+      if(result.mismatch)notes.push(`${fmtN(result.mismatch)} linha(s) rejeitada(s) por divergência entre identificador e CNPJ`);if(result.notFound)notes.push(`${fmtN(result.notFound)} linha(s) sem correspondência no SGT`);
       updateMentorPlanStatus(`dados_mentoria.xlsx importado: ${fmtN(result.records.length)} registro(s), ${fmtN(matched)} associado(s) à base atual${notes.length?' · '+notes.join(' · '):''}. A Data Realizada é lida somente da LEAN.`,'success');
     }catch(err){console.error(err);updateMentorPlanStatus('Falha na importação: '+err.message,'error');alert('Não foi possível importar dados_mentoria.xlsx: '+err.message)}
   }
@@ -510,18 +513,21 @@ rebuildData();
     for(const sheet of sheets){const h=findHeader(sheet);if(!chosen||h.score>chosen.h.score)chosen={sheet,h}}
     if(!chosen||chosen.h.score<8)throw new Error('A planilha deve conter CNPJ, ID e DATA PREVISTA MENTORIA.');
     const objects=rowsToObjects(chosen.sheet,chosen.h.index);
-    const currentById=new Map((currentSgt||[]).map(r=>[cleanText(r.id).replace(/\.0$/,''),cleanCnpj(r.cnpj)]).filter(x=>x[0]&&x[1]));
-    const m=new Map();let incomplete=0,invalidDate=0,mismatch=0;
+    const allIdentifiers=new Set();
+    (currentSgt||[]).forEach(r=>{const id=cleanText(r.id).replace(/\.0$/,'').trim(),prop=cleanText(r.proposta).replace(/\.0$/,'').trim();if(id)allIdentifiers.add(id);if(prop)allIdentifiers.add(prop)});
+    const m=new Map();let incomplete=0,invalidDate=0,mismatch=0,notFound=0;
     for(const o of objects){
-      const id=cleanText(field(o,'ID')).replace(/\.0$/,''),cnpj=cleanCnpj(field(o,'CNPJ'));
-      if(!id||!cnpj){if(id||cnpj)incomplete++;continue}
-      if(currentById.size&&currentById.has(id)&&currentById.get(id)!==cnpj){mismatch++;continue}
+      const ident=cleanText(field(o,'ID')).replace(/\.0$/,'').trim(),cnpj=cleanCnpj(field(o,'CNPJ'));
+      if(!ident||!cnpj){if(ident||cnpj)incomplete++;continue}
+      const contract=(currentSgt||[]).find(r=>cleanCnpj(r.cnpj)===cnpj&&(cleanText(r.id).replace(/\.0$/,'').trim()===ident||cleanText(r.proposta).replace(/\.0$/,'').trim()===ident));
+      if(!contract){if(allIdentifiers.has(ident))mismatch++;else notFound++;continue}
       const raw=field(o,'DATA PREVISTA MENTORIA','DATA PREVISTA','PREVISTA');
       const date=cleanText(raw)?excelDateToIso(raw):'';
       if(cleanText(raw)&&!date){invalidDate++;continue}
-      m.set(key(id,cnpj),{id,cnpj,data_prevista_mentoria:date});
+      const id=cleanText(contract.id).replace(/\.0$/,'').trim();
+      m.set(key(id,cnpj),{id,proposta:cleanText(contract.proposta),cnpj,data_prevista_mentoria:date});
     }
-    return {rows:[...m.values()],incomplete,invalidDate,mismatch};
+    return {rows:[...m.values()],incomplete,invalidDate,mismatch,notFound};
   }
 
   const fileInput=document.getElementById('fileMentorData');
@@ -564,7 +570,7 @@ rebuildData();
 
   const title=bar()?.querySelector('.mentor-data-title');
   if(title)title.textContent='Atualização local temporária da Data Prevista';
-  setLocalStatus('Opcional: importe dados_mentoria.xlsx para visualizar imediatamente as datas previstas mais recentes. A importação vale apenas neste navegador e não altera o GitHub.');
+  setLocalStatus('Opcional: importe dados_mentoria.xlsx para visualizar imediatamente as datas previstas mais recentes. A coluna ID pode conter o ID numérico do SGT ou o número da PROPOSTA. A importação vale apenas neste navegador e não altera o GitHub.');
 })();
 </script>
 
