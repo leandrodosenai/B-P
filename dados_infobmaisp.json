@@ -1,7 +1,7 @@
 {
   "schema": "brasil-mais-produtivo-infobmaisp",
   "version": 1,
-  "gerado_em": "2026-08-18T11:13:06.381Z",
+  "gerado_em": "2026-08-18T12:17:22.813Z",
   "origem": {
     "provedor": "Importação manual pelo gerador HTML",
     "pasta": "base_dados",
@@ -19,14 +19,14 @@
       "dados_mentoria": {
         "arquivo": "dados_mentoria.xlsx",
         "criado_em": null,
-        "atualizado_em": "2026-08-17T17:44:18.000Z"
+        "atualizado_em": "2026-08-18T12:14:55.000Z"
       }
     }
   },
   "contagens": {
     "sgt": 895,
     "lean": 664,
-    "dados_mentoria": 0
+    "dados_mentoria": 2
   },
   "dados": {
     "sgt": [
@@ -22090,6 +22090,17 @@
         "unidade_operacional": "Faculdade de Tecnologia SENAI Roberto Mange"
       }
     ],
-    "dados_mentoria": []
+    "dados_mentoria": [
+      {
+        "id": "0655821/2026",
+        "cnpj": "26442857000155",
+        "data_prevista_mentoria": "2026-08-18"
+      },
+      {
+        "id": "0655795/2026",
+        "cnpj": "26525809000120",
+        "data_prevista_mentoria": "2026-08-18"
+      }
+    ]
   }
 }
