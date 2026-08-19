@@ -1,7 +1,7 @@
 {
   "schema": "brasil-mais-produtivo-infobmaisp",
   "version": 2,
-  "gerado_em": "2026-08-19T14:29:19.333Z",
+  "gerado_em": "2026-08-19T21:16:16.291Z",
   "origem": {
     "provedor": "Importação manual pelo gerador HTML",
     "pasta": "base_dados",
@@ -19,14 +19,14 @@
       "dados_mentoria": {
         "arquivo": "dados_mentoria.xlsx",
         "criado_em": null,
-        "atualizado_em": "2026-08-19T12:55:00.000Z"
+        "atualizado_em": "2026-08-19T21:14:19.000Z"
       }
     }
   },
   "contagens": {
     "sgt": 898,
     "lean": 665,
-    "dados_mentoria": 4
+    "dados_mentoria": 9
   },
   "dados": {
     "sgt": [
@@ -23070,6 +23070,36 @@
         "proposta": "0656163/2026",
         "cnpj": "08574810000163",
         "data_prevista_mentoria": "2026-08-21"
+      },
+      {
+        "id": "809485",
+        "proposta": "0655578/2026",
+        "cnpj": "37345956000216",
+        "data_prevista_mentoria": "2026-08-19"
+      },
+      {
+        "id": "811183",
+        "proposta": "0655623/2026",
+        "cnpj": "60805693000111",
+        "data_prevista_mentoria": "2026-08-19"
+      },
+      {
+        "id": "809701",
+        "proposta": "0655830/2026",
+        "cnpj": "02901262000152",
+        "data_prevista_mentoria": "2026-08-20"
+      },
+      {
+        "id": "815005",
+        "proposta": "0756639/2026",
+        "cnpj": "15233142000176",
+        "data_prevista_mentoria": "2026-08-21"
+      },
+      {
+        "id": "809891",
+        "proposta": "0655931/2026",
+        "cnpj": "08103637000115",
+        "data_prevista_mentoria": "2026-08-25"
       }
     ]
   }
