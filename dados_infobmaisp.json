@@ -1,7 +1,7 @@
 {
   "schema": "brasil-mais-produtivo-infobmaisp",
   "version": 3,
-  "gerado_em": "2026-08-20T19:05:57.191Z",
+  "gerado_em": "2026-08-20T21:59:52.442Z",
   "origem": {
     "provedor": "Importação manual pelo gerador HTML",
     "pasta": "base_dados",
@@ -9,7 +9,7 @@
       "sgt": {
         "arquivo": "sgt.xlsx",
         "criado_em": null,
-        "atualizado_em": "2026-08-20T19:05:28.035Z"
+        "atualizado_em": "2026-08-20T19:05:28.000Z"
       },
       "lean": {
         "arquivo": "lean.xlsx",
@@ -19,19 +19,19 @@
       "dados_mentoria": {
         "arquivo": "dados_mentoria.xlsx",
         "criado_em": null,
-        "atualizado_em": "2026-08-20T17:51:51.142Z"
+        "atualizado_em": "2026-08-20T20:05:37.000Z"
       }
     },
     "historico_execucao": {
       "criterio": "Primeira Data de Execução observada por contrato; alterações posteriores do SGT são registradas sem sobrescrever a original.",
       "armazenamento_local": true,
-      "json_anterior_carregado": false
+      "json_anterior_carregado": true
     }
   },
   "contagens": {
     "sgt": 900,
     "lean": 666,
-    "dados_mentoria": 17,
+    "dados_mentoria": 19,
     "execucoes_ajustadas": 0
   },
   "dados": {
@@ -29499,6 +29499,18 @@
         "proposta": "0554493/2026",
         "cnpj": "19055596000155",
         "data_prevista_mentoria": "2026-08-21"
+      },
+      {
+        "id": "796963",
+        "proposta": "0554281/2026",
+        "cnpj": "06113700000179",
+        "data_prevista_mentoria": "2026-08-26"
+      },
+      {
+        "id": "808225",
+        "proposta": "0655379/2026",
+        "cnpj": "27159158000165",
+        "data_prevista_mentoria": "2026-08-28"
       }
     ]
   }
