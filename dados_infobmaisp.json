@@ -1,7 +1,7 @@
 {
   "schema": "brasil-mais-produtivo-infobmaisp",
   "version": 3,
-  "gerado_em": "2026-08-20T13:31:13.923Z",
+  "gerado_em": "2026-08-20T13:57:03.380Z",
   "origem": {
     "provedor": "Importação manual pelo gerador HTML",
     "pasta": "base_dados",
@@ -1066,8 +1066,8 @@
         "mes": 11,
         "ano_ciclo": 2025,
         "fallback_mentoria": "Sem registro / Pendente",
-        "data_execucao_original": "",
-        "data_execucao_ajustada": "sem alteração",
+        "data_execucao_original": "2025-10-14",
+        "data_execucao_ajustada": "Sem data no SGT",
         "execucao_foi_ajustada": false
       },
       {
@@ -1352,8 +1352,8 @@
         "mes": 3,
         "ano_ciclo": 2026,
         "fallback_mentoria": "Sem registro / Pendente",
-        "data_execucao_original": "",
-        "data_execucao_ajustada": "sem alteração",
+        "data_execucao_original": "2026-05-04",
+        "data_execucao_ajustada": "Sem data no SGT",
         "execucao_foi_ajustada": false
       },
       {
