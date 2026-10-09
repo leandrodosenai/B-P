@@ -1,7 +1,7 @@
 {
   "schema": "brasil-mais-produtivo-infobmaisp",
   "version": 3,
-  "gerado_em": "2026-10-08T17:01:22.287Z",
+  "gerado_em": "2026-10-09T14:42:24.536Z",
   "origem": {
     "provedor": "Importação manual pelo gerador HTML",
     "pasta": "base_dados",
@@ -9,12 +9,12 @@
       "sgt": {
         "arquivo": "sgt.xlsx",
         "criado_em": null,
-        "atualizado_em": "2026-10-08T16:55:48.000Z"
+        "atualizado_em": "2026-10-09T14:37:56.000Z"
       },
       "lean": {
         "arquivo": "lean.xlsx",
         "criado_em": null,
-        "atualizado_em": "2026-10-08T16:57:25.000Z"
+        "atualizado_em": "2026-10-09T14:37:36.000Z"
       },
       "dados_mentoria": {
         "arquivo": "dados_mentoria.xlsx",
@@ -23,14 +23,14 @@
       }
     },
     "historico_execucao": {
-      "criterio": "Primeira Data de Execução observada por contrato; alterações posteriores do SGT são registradas sem sobrescrever a original.",
+      "criterio": "Primeira Data de Execução observada por contrato; alterações posteriores do SGT são registradas sem sobrescrever a original. Todos os cálculos da Mentoria Educacional utilizam a Data de Execução original.",
       "armazenamento_local": true,
       "json_anterior_carregado": true
     }
   },
   "contagens": {
-    "sgt": 992,
-    "lean": 764,
+    "sgt": 993,
+    "lean": 765,
     "dados_mentoria": 48,
     "execucoes_ajustadas": 110
   },
@@ -3494,18 +3494,18 @@
         "cliente": "ATITUDE FASHION",
         "unidade": "Faculdade de Tecnologia SENAI Ítalo Bologna",
         "produto": "NOVO B+P MANUFATURA ENXUTA",
-        "status": "Aceito/Contratado",
+        "status": "Aceito/Em execução",
         "porte": "Micro Empresa",
         "data_aceitacao": "2026-08-06",
         "data_negociacao": "2026-08-05",
-        "data_execucao": "",
+        "data_execucao": "2026-10-08",
         "data_conclusao": "",
         "data_encerramento": "",
-        "consultor": "",
+        "consultor": "HELLAYNE CRISTINA SANTOS DE CASTRO",
         "mes": 8,
         "ano_ciclo": 2026,
         "fallback_mentoria": "Sem registro / Pendente",
-        "data_execucao_original": "",
+        "data_execucao_original": "2026-10-08",
         "data_execucao_ajustada": "sem alteração",
         "execucao_foi_ajustada": false
       },
@@ -6339,6 +6339,29 @@
         "execucao_foi_ajustada": false
       },
       {
+        "id": "837692",
+        "proposta": "0959821/2026",
+        "cnpj": "38151976000138",
+        "razao_social": "IRON BUILD ENGENHARIA METALICA LTDA",
+        "cliente": "IRON BUILD",
+        "unidade": "IST Automação GO",
+        "produto": "NOVO B+P MANUFATURA ENXUTA",
+        "status": "Aceito/Contratado",
+        "porte": "Pequeno Porte",
+        "data_aceitacao": "2026-10-01",
+        "data_negociacao": "2026-09-30",
+        "data_execucao": "",
+        "data_conclusao": "",
+        "data_encerramento": "",
+        "consultor": "",
+        "mes": 10,
+        "ano_ciclo": 2026,
+        "fallback_mentoria": "Sem registro / Pendente",
+        "data_execucao_original": "",
+        "data_execucao_ajustada": "sem alteração",
+        "execucao_foi_ajustada": false
+      },
+      {
         "id": "687316",
         "proposta": "0439945/2025",
         "cnpj": "18370832000165",
@@ -8712,7 +8735,7 @@
         "proposta": "0757287/2026",
         "cnpj": "25337816000217",
         "razao_social": "XAVIER SUPERMERCADOS LTDA",
-        "cliente": "",
+        "cliente": "XAVIER SUPERMERCADOS LTDA",
         "unidade": "Unidade Integrada SESI SENAI Rio Verde",
         "produto": "NOVO B+P MANUFATURA ENXUTA",
         "status": "Aceito/Contratado",
@@ -30437,7 +30460,7 @@
         "id": 18400,
         "cnpj": "37830775000102",
         "razao_social": "RONAN FERREIRA DE PAIVA",
-        "status": "Em preenchimento",
+        "status": "Concluído",
         "mentor": "Yago Francisco Lopes",
         "mentor_primeiro_nome": "Yago",
         "alunos": 5,
@@ -30450,11 +30473,11 @@
         "id": 18407,
         "cnpj": "43354165000174",
         "razao_social": "VERDANT PADARIA E CONFEITARIA LTDA",
-        "status": "Em preenchimento",
+        "status": "Concluído",
         "mentor": "Yago Francisco Lopes",
         "mentor_primeiro_nome": "Yago",
         "alunos": 5,
-        "data_visita": "2026-05-18",
+        "data_visita": "2026-03-13",
         "setor_industrial": "Fabricação de produtos de padaria e confeitaria com predominância de produção própria",
         "produto": "NOVO B+P MANUFATURA ENXUTA",
         "unidade_operacional": "Faculdade de Tecnologia SENAI Roberto Mange"
@@ -30476,7 +30499,7 @@
         "id": 18523,
         "cnpj": "39838987000153",
         "razao_social": "MFCAR AUTOPARTS LTDA",
-        "status": "Concluído",
+        "status": "Em preenchimento",
         "mentor": "Ricardo Robson Freitas de Araújo",
         "mentor_primeiro_nome": "Ricardo",
         "alunos": 5,
@@ -30827,7 +30850,7 @@
         "id": 19408,
         "cnpj": "56302287000169",
         "razao_social": "GRP ESQUADRIAS EM ALUMINIO LTDA",
-        "status": "Concluído",
+        "status": "Em preenchimento",
         "mentor": "Ricardo Robson Freitas de Araújo",
         "mentor_primeiro_nome": "Ricardo",
         "alunos": 3,
@@ -30957,7 +30980,7 @@
         "id": 19894,
         "cnpj": "33654768000138",
         "razao_social": "VELAS D'OUROS INDUSTRIA E COMERCIO DE VELAS LTDA",
-        "status": "Concluído",
+        "status": "Em preenchimento",
         "mentor": "Ricardo Robson Freitas de Araújo",
         "mentor_primeiro_nome": "Ricardo",
         "alunos": 5,
@@ -31139,7 +31162,7 @@
         "id": 20259,
         "cnpj": "65174372000180",
         "razao_social": "JK INDUSTRIA DE MOVEIS LTDA",
-        "status": "Concluído",
+        "status": "Em preenchimento",
         "mentor": "Ricardo Robson Freitas de Araújo",
         "mentor_primeiro_nome": "Ricardo",
         "alunos": 5,
@@ -31152,7 +31175,7 @@
         "id": 20387,
         "cnpj": "97354690000119",
         "razao_social": "PANIFICADORA FAMILIA DE NAZARE LTDA",
-        "status": "Concluído",
+        "status": "Em preenchimento",
         "mentor": "Ricardo Robson Freitas de Araújo",
         "mentor_primeiro_nome": "Ricardo",
         "alunos": 5,
@@ -32491,7 +32514,7 @@
         "id": 23841,
         "cnpj": "10270907000124",
         "razao_social": "PANIFICADORA SOFT PAN LTDA",
-        "status": "Concluído",
+        "status": "Em preenchimento",
         "mentor": "Ricardo Robson Freitas de Araújo",
         "mentor_primeiro_nome": "Ricardo",
         "alunos": 3,
@@ -32504,7 +32527,7 @@
         "id": 23843,
         "cnpj": "06311056000143",
         "razao_social": "PANIFICADORA FERRAZ",
-        "status": "Concluído",
+        "status": "Em preenchimento",
         "mentor": "Ricardo Robson Freitas de Araújo",
         "mentor_primeiro_nome": "Ricardo",
         "alunos": 5,
@@ -32785,6 +32808,19 @@
         "setor_industrial": "Fabricação de esquadrias de metal",
         "produto": "NOVO B+P MANUFATURA ENXUTA",
         "unidade_operacional": "Faculdade de Tecnologia SENAI Roberto Mange"
+      },
+      {
+        "id": 24190,
+        "cnpj": "37320553000131",
+        "razao_social": "MSM ENGENHARIA LTDA",
+        "status": "Em preenchimento",
+        "mentor": "Wellington De Souza Borges Júnior",
+        "mentor_primeiro_nome": "Wellington",
+        "alunos": 3,
+        "data_visita": "2026-10-09",
+        "setor_industrial": "Fabricação de artefatos de cimento para uso na construção",
+        "produto": "NOVO B+P MANUFATURA ENXUTA",
+        "unidade_operacional": "Escola SENAI Vila Canaã"
       }
     ],
     "dados_mentoria": [
