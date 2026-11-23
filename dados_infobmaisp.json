@@ -1,7 +1,7 @@
 {
   "schema": "brasil-mais-produtivo-infobmaisp",
   "version": 3,
-  "gerado_em": "2026-11-23T11:58:16.587Z",
+  "gerado_em": "2026-11-23T13:23:50.158Z",
   "origem": {
     "provedor": "Importação manual pelo gerador HTML",
     "pasta": "base_dados",
@@ -9,7 +9,7 @@
       "sgt": {
         "arquivo": "sgt.xlsx",
         "criado_em": null,
-        "atualizado_em": "2026-11-23T11:09:27.000Z"
+        "atualizado_em": "2026-11-23T12:07:06.000Z"
       },
       "lean": {
         "arquivo": "lean.xlsx",
@@ -23,7 +23,7 @@
       }
     },
     "historico_execucao": {
-      "criterio": "Primeira Data de Execução observada por contrato; alterações posteriores do SGT são registradas sem sobrescrever a original. Todos os cálculos da Mentoria Educacional utilizam a Data de Execução original.",
+      "criterio": "A Data de Execução vigente na planilha SGT é a referência oficial para todos os cálculos, estatísticas e SLA da Mentoria Educacional. O histórico de alterações é preservado apenas para rastreabilidade e não interfere nos cálculos.",
       "armazenamento_local": true,
       "json_anterior_carregado": false
     }
